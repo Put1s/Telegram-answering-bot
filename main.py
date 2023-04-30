@@ -24,6 +24,23 @@ api_hash = "YOUR_API_HASH"
 
 client = TelegramClient('anon', api_id, api_hash)
 
+user_replies_exists = os.path.isfile("user_replies.json")
+channel_replies_exists = os.path.isfile("channel_replies.json")
+
+if not user_replies_exists:
+    with open("user_replies.json", "w") as user_replies_json_file:
+        user_replies_json_file.write("{\n\t\n}")
+    print("User's replies json file was created in the directory with main.py.")
+
+if not channel_replies_exists:
+    with open("channel_replies.json", "w") as channel_replies_json_file:
+        channel_replies_json_file.write("{\n\t\n}")
+    print("Channel's replies json file was created in the directory with main.py.")
+
+if not user_replies_exists or not channel_replies_exists:
+    print("Fill in and restart the program.")
+    exit(0)
+
 with open("user_replies.json", "r") as user_replies_json_file, \
         open("channel_replies.json", "r") as channel_replies_json_file:
     user_replies = json.load(user_replies_json_file)
